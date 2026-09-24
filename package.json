@@ -1,0 +1,23 @@
+{
+  "name": "cinebook",
+  "version": "1.0.0",
+  "description": "Movie ticket booking with safe seat holds and Razorpay payments",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node tests/run-tests.js && node tests/run-demo-tests.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.8.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.3.0",
+    "pg": "^8.23.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
