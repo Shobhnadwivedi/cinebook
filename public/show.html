@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Choose seats — CineBook</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">CineBook</a>
+    <div class="userbox" id="userbox"></div>
+  </header>
+  <main>
+    <h1 id="title">Loading…</h1>
+    <p class="lede" id="subtitle"></p>
+    <p class="notice hidden" id="msg" aria-live="polite"></p>
+    <div class="screen-wrap"><div class="screen"></div><div class="screen-label">Screen this way</div></div>
+    <div class="seatmap"><div class="grid" id="grid"></div></div>
+    <div class="legend">
+      <span><button class="seat" disabled tabindex="-1"></button>Available</span>
+      <span><button class="seat selected" disabled tabindex="-1"></button>Your pick</span>
+      <span><button class="seat held" disabled tabindex="-1"></button>Someone is paying</span>
+      <span><button class="seat booked" disabled tabindex="-1"></button>Sold</span>
+    </div>
+    <p class="legend" id="prices"></p>
+  </main>
+  <div class="bar">
+    <div class="summary" id="summary">Select up to 10 seats</div>
+    <div class="countdown hidden" id="countdown" aria-live="polite"></div>
+    <div class="actions">
+      <button class="btn ghost hidden" id="changeBtn">Change seats</button>
+      <button class="btn" id="holdBtn" disabled>Hold seats</button>
+      <button class="btn hidden" id="payBtn">Pay</button>
+    </div>
+  </div>
+  <dialog id="signin">
+    <form>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" data-mode="login">Sign in</button>
+        <button type="button" role="tab" data-mode="signup">Create account</button>
+      </div>
+      <p class="notice error hidden"></p>
+      <div class="name-row hidden">
+        <label for="fullname">Name</label>
+        <input id="fullname" name="fullname" autocomplete="name" maxlength="60">
+      </div>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <label for="password">Password (8 or more characters)</label>
+      <input id="password" name="password" type="password" minlength="8" required>
+      <div class="dialog-actions">
+        <button type="button" class="btn ghost" data-cancel>Cancel</button>
+        <button class="btn" data-submit>Sign in</button>
+      </div>
+    </form>
+  </dialog>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="/app.js"></script>
+  <script src="/show.js"></script>
+</body>
+</html>
