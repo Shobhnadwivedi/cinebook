@@ -1,0 +1,151 @@
+/* public/styles.css — one stylesheet for all pages */
+:root {
+  --bg: #1b1026;
+  --surface: #26183a;
+  --line: #3b2a52;
+  --text: #f2edf7;
+  --muted: #a99bbb;
+  --seat: #7e6ba0;
+  --marigold: #f5b83d;
+  --booked: #3a2b4f;
+  --danger: #ff7a7a;
+  --ok: #7ddc9b;
+  --display: Futura, "Futura PT", "Century Gothic", "Trebuchet MS", sans-serif;
+  --body: "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 var(--body);
+  min-height: 100vh;
+}
+a { color: var(--marigold); }
+button, input { font: inherit; }
+:focus-visible { outline: 2px solid var(--marigold); outline-offset: 2px; }
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-family: var(--display); font-weight: 700; font-size: 1.35rem; letter-spacing: .02em; color: var(--text); text-decoration: none; }
+.userbox { display: flex; gap: .75rem; align-items: center; color: var(--muted); font-size: .95rem; }
+
+main { max-width: 1040px; margin: 0 auto; padding: 2rem clamp(1rem, 4vw, 3rem) 8rem; }
+h1 { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; margin: 0 0 .4rem; }
+h2 { font-family: var(--display); font-size: 1.4rem; margin: 0 0 .25rem; }
+.lede { color: var(--muted); margin: 0 0 2rem; max-width: 60ch; }
+
+.btn {
+  border: 0; border-radius: 999px; padding: .65rem 1.3rem; cursor: pointer;
+  background: var(--marigold); color: #2a1a00; font-weight: 600;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+
+/* ---------- home ---------- */
+.movie { padding: 1.5rem 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; }
+.movie .meta { color: var(--muted); font-size: .95rem; }
+.theatre-name { font-size: .9rem; color: var(--muted); margin: .25rem 0 .4rem; }
+.times { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .75rem; }
+.time {
+  padding: .4rem .9rem; border: 1px solid var(--seat); border-radius: 8px;
+  color: var(--text); text-decoration: none; font-variant-numeric: tabular-nums;
+}
+.time:hover { border-color: var(--marigold); color: var(--marigold); }
+@media (max-width: 640px) { .movie { grid-template-columns: 1fr; gap: .5rem; } }
+
+/* ---------- seat map ---------- */
+.screen-wrap { margin: 2.5rem auto 2rem; max-width: 640px; text-align: center; }
+.screen {
+  height: 36px; border-top: 4px solid var(--marigold); border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: 0 -18px 40px -12px rgba(245, 184, 61, .45);
+}
+.screen-label { color: var(--muted); font-size: .85rem; margin-top: -.6rem; }
+.seatmap { overflow-x: auto; padding-bottom: .5rem; }
+.grid { display: grid; gap: 6px; justify-content: center; min-width: max-content; margin: 0 auto; }
+.rowlabel { color: var(--muted); font-size: .8rem; display: grid; place-items: center; width: 22px; }
+.seat {
+  width: 30px; height: 28px; padding: 0; cursor: pointer;
+  border: 1.5px solid var(--seat); background: transparent; color: var(--muted);
+  border-radius: 8px 8px 4px 4px; font-size: .68rem;
+}
+.seat.premium { border-color: #b59ad6; }
+.seat:hover:not(:disabled) { border-color: var(--marigold); color: var(--text); }
+.seat.selected { background: var(--marigold); border-color: var(--marigold); color: #2a1a00; font-weight: 700; }
+.seat.mine { background: var(--marigold); border-color: var(--marigold); color: #2a1a00; }
+.seat.held { background: repeating-linear-gradient(45deg, var(--booked), var(--booked) 3px, transparent 3px, transparent 6px); border-color: var(--booked); cursor: not-allowed; color: transparent; }
+.seat.booked { background: var(--booked); border-color: var(--booked); color: transparent; cursor: not-allowed; }
+.aisle { width: 18px; }
+.gap-row { height: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; color: var(--muted); font-size: .85rem; margin-top: 1rem; }
+.legend .seat { width: 18px; height: 16px; cursor: default; vertical-align: middle; margin-right: .35rem; }
+
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line);
+  padding: 1rem clamp(1rem, 4vw, 3rem); display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap;
+}
+.bar .summary { font-size: .95rem; }
+.bar .summary strong { font-size: 1.15rem; }
+.countdown { font-family: var(--display); font-variant-numeric: tabular-nums; font-size: 1.4rem; color: var(--marigold); }
+.countdown.low { color: var(--danger); }
+.actions { display: flex; gap: .6rem; }
+
+.notice { padding: .75rem 1rem; border-radius: 10px; margin: 0 0 1rem; border: 1px solid var(--line); }
+.notice.error { border-color: var(--danger); color: var(--danger); }
+.notice.ok { border-color: var(--ok); color: var(--ok); }
+.hidden { display: none !important; }
+
+/* ---------- sign-in dialog ---------- */
+dialog { background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 16px; padding: 1.75rem; width: min(420px, 92vw); }
+dialog::backdrop { background: rgba(10, 5, 16, .7); }
+label { display: block; font-size: .9rem; color: var(--muted); margin: .9rem 0 .3rem; }
+input { width: 100%; padding: .65rem .8rem; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+.dialog-actions { display: flex; gap: .6rem; justify-content: flex-end; margin-top: 1.25rem; }
+
+/* ---------- bookings ---------- */
+.ticket { border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem 1.3rem; margin-bottom: 1rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.ticket.highlight { border-color: var(--marigold); }
+.status { font-weight: 600; }
+.status.CONFIRMED { color: var(--ok); }
+.status.REFUND_PENDING { color: var(--danger); }
+.status.HELD { color: var(--marigold); }
+.status.REFUNDED { color: var(--muted); }
+
+/* ---------- test-mode banner ---------- */
+.testbar { background: var(--marigold); color: #2a1a00; text-align: center; font-size: .88rem; padding: .45rem 1rem; }
+
+/* ---------- demo checkout ---------- */
+.demopay-amount { font-family: var(--display); font-size: 2.4rem; margin: .5rem 0 1rem; }
+#demopay .dialog-actions { flex-wrap: wrap; }
+#demopay [data-demo="pay"] { order: -1; flex-basis: 100%; }
+
+/* ---------- sign-in tabs ---------- */
+.tabs { display: flex; gap: .5rem; margin-bottom: .5rem; }
+.tabs button { flex: 1; background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: .45rem; cursor: pointer; }
+.tabs button[aria-selected="true"] { color: var(--text); border-color: var(--marigold); }
+
+/* ---------- admin ---------- */
+.admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+.panel { border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem; }
+.panel h2 { margin-bottom: .5rem; }
+select { width: 100%; padding: .65rem .8rem; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: inherit; }
+.panel .btn { margin-top: 1rem; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.table-wrap { overflow-x: auto; margin-bottom: 2rem; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { text-align: left; padding: .55rem .6rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { color: var(--muted); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* Phones: shrink seats so a full row fits without sideways scrolling */
+@media (max-width: 480px) {
+  .grid { gap: 4px; }
+  .seat { width: 22px; height: 22px; font-size: .6rem; }
+  .rowlabel { width: 14px; }
+  .aisle { width: 10px; }
+  .bar .summary { flex-basis: 100%; }
+}
